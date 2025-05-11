@@ -1,7 +1,17 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
+/// <reference types="vitest" />
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import * as path from "path";
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react()],
-})
+  test: {
+    globals: true,
+    environment: "jsdom",
+    include: ["src/**/*.test.{js,ts,jsx,tsx}"],
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
+  },
+});

@@ -11,10 +11,15 @@ function App() {
   const [catImage, setCatImage] = useState("https://cdn2.thecatapi.com/images/uo.jpg");
 
   const onclickButton = async () => {
-    console.log("Button clicked");
-    const response = await axios.get("https://api.thecatapi.com/v1/images/search").then((res) => {
-      return res.data;
-    });
+    // 画像を取得するAPIを叩く
+    const response = await axios
+      .get("https://api.thecatapi.com/v1/images/search")
+      .then((res) => {
+        return res.data;
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     setCatImage(response[0].url);
   };
 

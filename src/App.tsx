@@ -7,6 +7,8 @@ import { Button } from "@yamada-ui/react";
 import { Box } from "@yamada-ui/react";
 import { Image } from "@yamada-ui/react";
 
+import PageLayout from "./components/PageLayout";
+
 function App() {
   const [catImage, setCatImage] = useState("https://cdn2.thecatapi.com/images/uo.jpg");
 
@@ -23,14 +25,17 @@ function App() {
     setCatImage(response[0].url);
   };
 
+  const data = "React + TypeScript + Yamada UI";
   return (
     <>
-      <Box>
-        <Button onClick={onclickButton}>クリックすると画像が変わるよ</Button>
-        <Box mt="10">
-          <Image src={catImage} boxSize="xl" />
+      <PageLayout data={data}>
+        <Box>
+          <Button onClick={onclickButton}>クリックすると画像が変わるよ</Button>
+          <Box mt="10">
+            <Image src={catImage} boxSize="xl" />
+          </Box>
         </Box>
-      </Box>
+      </PageLayout>
     </>
   );
 }

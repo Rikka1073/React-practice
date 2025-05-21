@@ -1,5 +1,6 @@
 import "./App.css";
 import { useState } from "react";
+import { createContext } from "react";
 
 import axios from "axios";
 
@@ -8,6 +9,8 @@ import { Box } from "@yamada-ui/react";
 import { Image } from "@yamada-ui/react";
 
 import PageLayout from "./components/PageLayout";
+
+export const CatContext = createContext("猫です");
 
 function App() {
   const [catImage, setCatImage] = useState("https://cdn2.thecatapi.com/images/uo.jpg");

@@ -1,5 +1,15 @@
+import { useContext } from "react";
+import { CatContext } from "../App";
+
 const Header = ({ data }) => {
-  return <div>{data}</div>;
+  const value = useContext(CatContext);
+
+  return (
+    <>
+      <div>{data}</div>
+      <div>{value}</div>
+    </>
+  );
 };
 
 export default Header;

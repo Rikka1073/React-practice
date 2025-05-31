@@ -3,8 +3,9 @@ import { useState } from "react";
 import { createContext } from "react";
 
 import axios from "axios";
+import { useForm, SubmitHandler } from "react-hook-form";
 
-import { Button } from "@yamada-ui/react";
+import { Button, Input } from "@yamada-ui/react";
 import { Box } from "@yamada-ui/react";
 import { Image } from "@yamada-ui/react";
 
@@ -29,6 +30,18 @@ function App() {
   };
 
   const data = "React + TypeScript + Yamada UI";
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<Inputs>();
+  const onSubmit: SubmitHandler<Inputs> = (data) => console.log(data);
+
+  type Inputs = {
+    example: string;
+    exampleRequired: string;
+  };
+
   return (
     <>
       <PageLayout data={data}>
@@ -36,6 +49,32 @@ function App() {
           <Button onClick={onclickButton}>クリックすると画像が変わるよ</Button>
           <Box mt="10">
             <Image src={catImage} boxSize="xl" />
+          </Box>
+          <Box mt="10">
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <input
+                maxLength={5}
+                {...register("exampleRequired", {
+                  required: true,
+                  maxLength: {
+                    value: 5,
+                    message: "最大5文字です",
+                  },
+                })}
+              />
+              {/* 
+              <FormControl
+                invalid={!!errors.name}
+                label="Name"
+                errorMessage={errors.name ? errors.name.message : undefined}
+              >
+                <Input variant="outline" />
+              </FormControl> */}
+              {errors.exampleRequired && <span color="red">{errors.exampleRequired.message}</span>}
+              <Button type="submit" mt="10">
+                Submit
+              </Button>
+            </form>
           </Box>
         </Box>
       </PageLayout>
